@@ -1,0 +1,7 @@
+com/jvmfuzzing/apigetter/GetFiles.class
+com/jvmfuzzing/apigetter/Main.class
+com/jvmfuzzing/apigetter/DBOperation.class
+com/jvmfuzzing/apigetter/ClassInfo.class
+com/jvmfuzzing/apigetter/MethodInfo.class
+com/jvmfuzzing/apigetter/TestcaseInfo.class
+com/jvmfuzzing/apigetter/Mutator.class

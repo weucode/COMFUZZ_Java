@@ -1,0 +1,12 @@
+INFO main com.jvmfuzzing.generator.UnprimitiveGenerator - cannot generate:ImageObserver
+INFO main com.jvmfuzzing.generator.UnprimitiveGenerator - cannot generate:ByteBuffer
+INFO main com.jvmfuzzing.generator.UnprimitiveGenerator - cannot generate:LongBinaryOperator
+INFO main com.jvmfuzzing.generator.UnprimitiveGenerator - cannot generate:Point2D
+INFO main com.jvmfuzzing.generator.UnprimitiveGenerator - cannot generate:Point2D
+INFO main com.jvmfuzzing.generator.UnprimitiveGenerator - cannot generate:CharBuffer
+INFO main com.jvmfuzzing.generator.UnprimitiveGenerator - cannot generate:CharBuffer
+INFO main com.jvmfuzzing.generator.UnprimitiveGenerator - cannot generate:CharBuffer
+INFO main com.jvmfuzzing.generator.UnprimitiveGenerator - cannot generate:CharBuffer
+INFO main com.jvmfuzzing.generator.UnprimitiveGenerator - cannot generate:CharBuffer
+INFO main com.jvmfuzzing.generator.UnprimitiveGenerator - cannot generate:CharBuffer
+INFO main com.jvmfuzzing.generator.UnprimitiveGenerator - cannot generate:CharBuffer

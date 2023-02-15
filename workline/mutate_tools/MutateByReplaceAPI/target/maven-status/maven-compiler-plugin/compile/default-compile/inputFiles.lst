@@ -1,0 +1,7 @@
+/root/COMFUZZ_Java/workline/mutate_tools/MutateByReplaceAPI/src/main/java/com/jvmfuzzing/apigetter/MethodInfo.java
+/root/COMFUZZ_Java/workline/mutate_tools/MutateByReplaceAPI/src/main/java/com/jvmfuzzing/apigetter/TestcaseInfo.java
+/root/COMFUZZ_Java/workline/mutate_tools/MutateByReplaceAPI/src/main/java/com/jvmfuzzing/apigetter/GetFiles.java
+/root/COMFUZZ_Java/workline/mutate_tools/MutateByReplaceAPI/src/main/java/com/jvmfuzzing/apigetter/DBOperation.java
+/root/COMFUZZ_Java/workline/mutate_tools/MutateByReplaceAPI/src/main/java/com/jvmfuzzing/apigetter/Main.java
+/root/COMFUZZ_Java/workline/mutate_tools/MutateByReplaceAPI/src/main/java/com/jvmfuzzing/apigetter/ClassInfo.java
+/root/COMFUZZ_Java/workline/mutate_tools/MutateByReplaceAPI/src/main/java/com/jvmfuzzing/apigetter/Mutator.java
