@@ -11,9 +11,9 @@ class Hparams:
     parser.add_argument("--max_iterator", type=int, default=3, help="The max count of mutation.")
     
     parser.add_argument("--use_testsuits_head", type=bool, default=False, help="Whether use head extracted from testsuits.")
-    parser.add_argument("--testsuits_head_num", type=int, default=0, help="The number of head.")
+    parser.add_argument("--testsuits_head_num", type=int, default=5, help="The number of head.")
 
-    parser.add_argument('--file_num', default=1000, type=int,
+    parser.add_argument('--file_num', default=10, type=int,
                         help='Specify the total number of generated files.Please enter a multiple of 10!')
     parser.add_argument('--batch_size', default=8, type=int,
                         help='Batch size for generation(increase for GPUs, 16 is recommended for RTX 2080)')

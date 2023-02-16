@@ -10,7 +10,7 @@ import argparse
 import random
 
 import sys
-sys.path.append(os.getcwd().replace('\\','/'))
+sys.path.append(os.getcwd().replace('\\','/').replace('workline',''))
 from src.utils.config import Hparams
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = "0"
@@ -53,13 +53,23 @@ def get_model_head(testsuits_head_num):
     selected_head = random.sample(head_list, testsuits_head_num)
     return selected_head
 
+def get_proper_num(tmp_num):
+    for i in [50, 40, 30, 20, 10, 5, 4, 3, 2, 1]:
+        if tmp_num%i == 0:
+            return (int(tmp_num/i), i)
+
 def generate(hparams):
     # Load model.
     generator, tokenizer = loadModel(hparams)
     if hparams.use_testsuits_head:
         # Init arguments.
         selected_head = get_model_head(hparams.testsuits_head_num)
-        num_return_sequences = int(hparams.file_num / hparams.testsuits_head_num)
+        tmp_num = int(hparams.file_num / hparams.testsuits_head_num)
+        if tmp_num > 100:
+            num_return_sequences, each_iter_num = get_proper_num(tmp_num)
+        else:
+            num_return_sequences = tmp_num
+            each_iter_num = 1
         
         # Generate.
         for index, head in enumerate(selected_head):

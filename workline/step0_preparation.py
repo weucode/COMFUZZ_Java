@@ -21,10 +21,16 @@ def update_java_version():
         with open(currentPath+project+"/pom.xml", "r") as f1:
             content = f1.read()
         with open(currentPath+project+"/pom.xml", "w") as f2:
-            f2.write(content.replace("361", "301"))
+            f2.write(content.replace("301", "361"))
+
+def unzip_model():
+    run_cmd("unzip -q checkpoint-400000.zip", currentPath.replace("workline", "data/model"))
 
 def unzip_dependencies():
     run_cmd("unzip -q Dependencies.zip", currentPath+"/generate_tools")
+
+def unzip_jvms():
+    run_cmd("unzip -q jvm_20230216.zip", "/root")
 
 def install_mvn_project():
     for i in range(3):
@@ -32,6 +38,8 @@ def install_mvn_project():
 
 
 if __name__ == '__main__':
-    # unzip_dependencies()
-    # install_mvn_project()
+    unzip_model()
+    unzip_dependencies()
+    unzip_jvms()
     update_java_version()
+    install_mvn_project()
