@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- This is often your domain name (reversed.)  -->
+    <groupId>com.jvmfuzzing</groupId>
+    <!-- The name of this project (actually, the name of the artifact, which is the thing that this project produces. A jar in this case.) -->
+    <artifactId>mutation_by_all</artifactId>
+    <!-- The version of this project. SNAPSHOT means "we're still working on it" -->
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <!-- Tell Maven we want to use Java 8 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- Tell Maven to treat all source files as UTF-8 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.javaparser</groupId>
+            <artifactId>javaparser-core</artifactId>
+            <version>3.22.0</version>
+        </dependency>
+        <!--<dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.7.2</version>
+        </dependency>-->
+        <!--In order to use mysql-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.16</version> 
+        </dependency>
+
+        <!--In order to use StringUtils-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.7</version>
+        </dependency>
+        <!--In order to use GenerateTestcase-->
+        <dependency>
+            <groupId>com.jvmfuzzing</groupId>
+            <artifactId>generator_new</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!--In order to use logger-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+         <!-- In order to use MutateByReplaceVar -->
+        <dependency>
+            <groupId>com.jvmfuzzing</groupId>
+            <artifactId>mutation</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- In order to use MutateByReplaceAPI --> 
+        <dependency>
+            <groupId>com.jvmfuzzing</groupId>
+            <artifactId>apigetter</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <!-- This blob of configuration tells Maven to make the jar executable. You can run it with:
+    mvn clean package
+    java -jar target/javaparser-maven-sample-1.0-SNAPSHOT-shaded.jar
+    -->
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>log4j.properties</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.jvmfuzzing.mutation_by_all.Main</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <version>3.8.0</version>
+              <configuration>
+	<source>1.8</source>
+	<target>1.8</target>
+	<testSource>1.8</testSource>
+	<testTarget>1.8</testTarget>
+                <encoding>UTF-8</encoding>
+                <compilerArguments>
+                        <extdirs>libs</extdirs>
+                        <verbose />
+			<bootclasspath>/usr/local/java/jdk1.8.0_361/jre/lib/rt.jar:/usr/local/java/jdk1.8.0_361/jre/lib/jce.jar:/usr/local/java/jdk1.8.0_361/jre/lib/jsse.jar</bootclasspath>
+                </compilerArguments>
+              </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

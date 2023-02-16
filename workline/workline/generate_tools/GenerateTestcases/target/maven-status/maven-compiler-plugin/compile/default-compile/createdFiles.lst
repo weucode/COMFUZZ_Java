@@ -1,0 +1,13 @@
+com/jvmfuzzing/generator/VariableComponent.class
+com/jvmfuzzing/generator/VariableGenerater.class
+com/jvmfuzzing/generator/Main.class
+com/jvmfuzzing/generator/CodeVisitor$MainMethodComponent.class
+com/jvmfuzzing/generator/GetFiles.class
+com/jvmfuzzing/generator/UnprimitiveGenerator.class
+com/jvmfuzzing/generator/DBOperation.class
+com/jvmfuzzing/generator/GroupGenerator.class
+com/jvmfuzzing/generator/CodeVisitor.class
+com/jvmfuzzing/generator/UnprimitiveGenerator$NoAvailableConstructorException.class
+com/jvmfuzzing/generator/PrimitiveGenerator.class
+com/jvmfuzzing/generator/GroupGenerator$GroupInfo.class
+com/jvmfuzzing/generator/ConstructorInfo.class

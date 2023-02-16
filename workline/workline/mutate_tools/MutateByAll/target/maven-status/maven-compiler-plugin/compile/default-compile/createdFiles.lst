@@ -1,0 +1,14 @@
+com/jvmfuzzing/mutation_by_all/MutationbyJump.class
+com/jvmfuzzing/mutation_by_all/TestcaseInfo.class
+com/jvmfuzzing/mutation_by_all/SelectDB.class
+com/jvmfuzzing/mutation_by_all/mutationbyOperator.class
+com/jvmfuzzing/mutation_by_all/CreateJavaFile.class
+com/jvmfuzzing/mutation_by_all/SaveToDB_new.class
+com/jvmfuzzing/mutation_by_all/MutationbyTrueAndInsert.class
+com/jvmfuzzing/mutation_by_all/MutationbyTimes.class
+com/jvmfuzzing/mutation_by_all/GenerateBinnary.class
+com/jvmfuzzing/mutation_by_all/MutationbyInsertAndTypeCasting.class
+com/jvmfuzzing/mutation_by_all/ReadTxt.class
+com/jvmfuzzing/mutation_by_all/ClassifyVariable.class
+com/jvmfuzzing/mutation_by_all/Main.class
+com/jvmfuzzing/mutation_by_all/MutationbyTrue.class

@@ -1,0 +1,14 @@
+/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/Main.java
+/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/CreateJavaFile.java
+/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/mutationbyOperator.java
+/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/MutationbyTrueAndInsert.java
+/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/TestcaseInfo.java
+/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/GenerateBinnary.java
+/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/SaveToDB_new.java
+/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/ReadTxt.java
+/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/MutationbyTimes.java
+/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/MutationbyTrue.java
+/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/SelectDB.java
+/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/MutationbyJump.java
+/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/MutationbyInsertAndTypeCasting.java
+/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/ClassifyVariable.java
