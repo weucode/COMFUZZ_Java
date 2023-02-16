@@ -7,42 +7,16 @@ import time
 import sys
 import os
 import argparse
+import random
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0,2"
+import sys
+sys.path.append(os.getcwd().replace('\\','/'))
+from src.utils.config import Hparams
 
-currentPath = os.getcwd().replace('\\','/')
+# os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
-class Hparams_Generator:
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--file_num', default=1000, type=int,
-                        help='Specify the total number of generated files.Please enter a multiple of 10!')
-    parser.add_argument('--batch_size', default=8, type=int,
-                        help='Batch size for generation(increase for GPUs, 16 is recommended for RTX 2080)')
-    parser.add_argument('--top_k', default=0, type=int, help='Sample only from top k tokens')
-    parser.add_argument('--top_p', default=0.0, type=float, help='Sample from top p prob (overrides top_k if nonzero)')
-    parser.add_argument('--temperature', default=0.25, type=float, help='Temperature of the generated texts')
-    parser.add_argument('--generate_prefix_list', default="['public class MyJVMTest']", type=str,
-                        help='Prefix used for generation, needs to be consist with data_prefix')
-    parser.add_argument('--max_length', default=1024, type=int, help='The max value of generation length.')
-    parser.add_argument('--model_dir', default=currentPath.replace('workline','data')+'/model/checkpoint-400000', type=str,
-                        help='Pretrained model path')
-    parser.add_argument('--save_dir', default=currentPath.replace('workline','data')+'/generate', type=str,
-                        help='Generate file storage path')
 
-hparams = Hparams_Generator().parser.parse_args()
-
-# if hparams.file_num < 50:
-#     each_iter_num = 1
-#     num_return_sequences = hparams.file_num
-# else:
-#     each_iter_num = int(hparams.file_num / 50)
-#     num_return_sequences = 50
-
-first_head = 6
-second_head = 4
-each_iter_num = int(hparams.file_num / (first_head+second_head))
-
-def loadModel():
+def loadModel(hparams):
     start = time.time()
     print(f'Loading the model, it will take about 10 seconds, please wait a moment.')
     print("Model path:"+hparams.model_dir)
@@ -52,7 +26,7 @@ def loadModel():
     print("Model loading completed:", time.time() - start)
     return generator, tokenizer
 
-def generationTextPipe(generator,tokenizer,prefixList,num_return_sequences=50,count=1):
+def generationTextPipe(hparams,generator,tokenizer,each_iter_num,prefixList,num_return_sequences=50,count=1):
     # Start the generation and write out the generated content.
     allFunctions = []
     save_dir = hparams.save_dir
@@ -72,19 +46,38 @@ def generationTextPipe(generator,tokenizer,prefixList,num_return_sequences=50,co
                     f.write(content)
             count += num_return_sequences
 
+def get_model_head(testsuits_head_num):
+    with open("generate_tools/model_head.txt", "r") as f:
+        content = f.read()
+    head_list = content.split("\n<separator>\n")
+    selected_head = random.sample(head_list, testsuits_head_num)
+    return selected_head
 
-if __name__ == '__main__':
-    # Generate.
-    # time_start = time.time()
-    generator, tokenizer = loadModel()
-    prefixList = ['public class MyJVMTest']
-    generationTextPipe(generator, tokenizer, prefixList=prefixList, num_return_sequences = first_head, count = 1)
-    prefixList = ['import java']
-    generationTextPipe(generator, tokenizer, prefixList=prefixList, num_return_sequences = second_head, 
-                        count = first_head*each_iter_num+1)
-    # time_end = time.time()
-    # time_sum = time_end - time_start
-    # print("Total time spent(s):",time_sum)
+def generate(hparams):
+    # Load model.
+    generator, tokenizer = loadModel(hparams)
+    if hparams.use_testsuits_head:
+        # Init arguments.
+        selected_head = get_model_head(hparams.testsuits_head_num)
+        num_return_sequences = int(hparams.file_num / hparams.testsuits_head_num)
+        
+        # Generate.
+        for index, head in enumerate(selected_head):
+            generationTextPipe( hparams, generator, tokenizer, each_iter_num, prefixList=[head], 
+                                num_return_sequences = num_return_sequences, count = 1+index*num_return_sequences)
+    else:
+        # Init arguments.
+        first_head = 6
+        second_head = 4
+        each_iter_num = int(hparams.file_num / (first_head+second_head))
+        
+        # Generate.
+        prefixList = ['public class MyJVMTest']
+        generationTextPipe( hparams, generator, tokenizer, each_iter_num, prefixList=prefixList, 
+                            num_return_sequences = first_head, count = 1)
+        prefixList = ['import java']
+        generationTextPipe( hparams, generator, tokenizer, each_iter_num, prefixList=prefixList, 
+                            num_return_sequences = second_head, count = first_head*each_iter_num+1)
 
     # Check grammar.
     print("Start to check grammar.")
@@ -98,3 +91,9 @@ if __name__ == '__main__':
     print("Start to insert.")
     task = os.popen(cmd)
     task.close()
+
+
+if __name__ == '__main__':
+    hparams = Hparams().parser.parse_args()
+    generate(hparams)
+    

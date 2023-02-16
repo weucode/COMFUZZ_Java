@@ -1,8 +1,0 @@
-/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByReplaceVar/src/main/java/com/jvmfuzzing/mutation/DBOperation.java
-/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByReplaceVar/src/main/java/com/jvmfuzzing/mutation/Mutator.java
-/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByReplaceVar/src/main/java/com/jvmfuzzing/mutation/Main.java
-/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByReplaceVar/src/main/java/com/jvmfuzzing/mutation/GetFiles.java
-/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByReplaceVar/src/main/java/com/jvmfuzzing/mutation/TestcaseInfo.java
-/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByReplaceVar/src/main/java/com/jvmfuzzing/mutation/UsefulMethodInfo.java
-/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByReplaceVar/src/main/java/com/jvmfuzzing/mutation/MutateByMethodInfo.java
-/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByReplaceVar/src/main/java/com/jvmfuzzing/mutation/VariableDecInfo.java

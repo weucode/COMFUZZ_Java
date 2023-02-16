@@ -51,15 +51,16 @@ public class DBOperation {
         }
         try{
             conn.setAutoCommit(false); 
-            PreparedStatement pstmt = conn.prepareStatement("insert into Table_Testcase (Testcase_context, SourceFun_id, SourceTestcase_id, Fuzzing_times, Mutation_method, Mutation_times, Interesting_times, Probability) values (?, 0, 0, 0, 0, 0, 0, 0)"); 
+            PreparedStatement pstmt = conn.prepareStatement("insert into Table_Testcase (Testcase_context, SourceFun_id, SourceTestcase_id, Fuzzing_times, Mutation_method, Mutation_times, Interesting_times, Probability) values (?, ?, 0, 0, 0, 0, 0, 0)"); 
             for (int i = 0; i < contentList.size(); i++) {     
                 pstmt.clearParameters();     
                 pstmt.setString(1, contentList.get(i));     
-                pstmt.execute();     
+                pstmt.setInt(2, i+1);
+                pstmt.execute();
                 if (i % 1000 == 0) {         
-                    conn.commit();  
-                } 
-            } 
+                    conn.commit();
+                }
+            }
             conn.commit();
         } catch (SQLException e) {
             e.printStackTrace();

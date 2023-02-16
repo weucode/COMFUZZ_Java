@@ -11,5 +11,4 @@ com/jvmfuzzing/mutation_by_all/MutationbyInsertAndTypeCasting.class
 com/jvmfuzzing/mutation_by_all/ReadTxt.class
 com/jvmfuzzing/mutation_by_all/ClassifyVariable.class
 com/jvmfuzzing/mutation_by_all/Main.class
-com/jvmfuzzing/mutation_by_all/Linux_cov.class
 com/jvmfuzzing/mutation_by_all/MutationbyTrue.class

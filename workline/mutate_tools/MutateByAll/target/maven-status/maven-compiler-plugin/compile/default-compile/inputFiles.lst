@@ -8,7 +8,6 @@
 /JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/ReadTxt.java
 /JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/MutationbyTimes.java
 /JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/MutationbyTrue.java
-/JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/Linux_cov.java
 /JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/SelectDB.java
 /JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/MutationbyJump.java
 /JVMFuzzing/COMFUZZ_Java/workline/mutate_tools/MutateByAll/src/main/java/com/jvmfuzzing/mutation_by_all/MutationbyInsertAndTypeCasting.java

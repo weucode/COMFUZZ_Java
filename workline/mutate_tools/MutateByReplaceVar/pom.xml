@@ -119,7 +119,7 @@
                 <compilerArguments>
                         <extdirs>libs</extdirs>
                         <verbose />
-			<bootclasspath>/usr/local/java/jdk1.8.0_361/jre/lib/rt.jar:/usr/local/java/jdk1.8.0_361/jre/lib/jce.jar:/usr/local/java/jdk1.8.0_361/jre/lib/jsse.jar</bootclasspath>
+			<bootclasspath>/usr/local/java/jdk1.8.0_301/jre/lib/rt.jar:/usr/local/java/jdk1.8.0_301/jre/lib/jce.jar:/usr/local/java/jdk1.8.0_301/jre/lib/jsse.jar</bootclasspath>
                 </compilerArguments>
               </configuration>
             </plugin>

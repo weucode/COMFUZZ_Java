@@ -13,29 +13,14 @@ from src.studyMysql.Table_Operation import Table_Testcase,Table_Result
 
 from workline.table_to_class.Table_Testcase_Class import Testcase_Object
 
-import argparse
-
-parser = argparse.ArgumentParser()
-parser.add_argument("--testcase_type", type = int, help="0-fuzzing origin testcases 1-fuzzing mutated testcases")
-args = parser.parse_args()
-
-
-start_time = time.time()
 
 table_Testcases = Table_Testcase()
 
-if args.testcase_type == 0:
-    # Obtain the untested test cases by Fuzzing_times=0
-    list_unfuzzing = table_Testcases.selectFuzzingTimeFromTableTestcase(0)
-elif args.testcase_type == 1:
-    # Obtain the mutated test cases
-    list_unfuzzing = table_Testcases.selectAllMutationFromTableTestcase()
-else:
-    raise RuntimeError("Invalid value for argument 'testcase_type'!")
 
 def muti_javac_compile(testcase_object):
     # testcase_object = Testcase_Object(testcase)
     tqdm.write('*' * 25 + f'compile{testcase_object.Id}' + '*' * 25)
+    start_time = time.time()
     Compiled_result = testcase_object.engine_compile_testcase()
     if Compiled_result != None:
         # print(testcase_object.Id," Start insert results...",len(Compiled_result.outputs))
@@ -131,32 +116,59 @@ def get_coverage_value(cmd):
     return cov_folat
 
 
-old_cov_result_list = [0,0,0]
-pbar = tqdm(total=len(list_unfuzzing))
-# for index in range(1):
-for index in range(len(list_unfuzzing)):
-    testcase = list_unfuzzing[index]
-    if testcase[1] == "":
+def harness(testcase_type):
+    start_time = time.time()
+    if testcase_type == 0:
+        # Obtain the untested test cases by Fuzzing_times=0
+        list_unfuzzing = table_Testcases.selectFuzzingTimeFromTableTestcase(0)
+    elif testcase_type == 1:
+        # Obtain the mutated test cases(interesting)
+        list_unfuzzing = table_Testcases.selectInterestingTestcase()
+    elif testcase_type == 2:
+        # Obtain the mutated test cases(not interesting)
+        list_unfuzzing = table_Testcases.selectNotInterestingTestcase()
+    else:
+        raise RuntimeError("Invalid value for argument 'testcase_type'!")
+
+    old_cov_result_list = [0,0,0]
+    pbar = tqdm(total=len(list_unfuzzing))
+    print("list_unfuzzing size:",len(list_unfuzzing))
+    for index in range(0):
+    # for index in range(len(list_unfuzzing)):
+        testcase = list_unfuzzing[index]
+        if testcase[1] == "":
+            pbar.update(1)
+            continue
+        testcase_object = Testcase_Object(testcase)
+        origin_fuzzing_time = testcase_object.Interesting_times
+
+        # Execute the test case.
+        muti_javac_compile(testcase_object)
+        muti_harness(testcase_object)
+
+        # If do not trigger different behaviors, obtain the code coverage.
+        print(origin_fuzzing_time," ",testcase_object.Interesting_times)
+        if testcase_object.Interesting_times == origin_fuzzing_time:
+            cov_result_list = get_each_coverage()
+            for i in range(3):
+                if cov_result_list[i] > old_cov_result_list[i]:
+                    testcase_object.updateProbabilityToOne()
+                    old_cov_result_list = cov_result_list
+                    break
         pbar.update(1)
-        continue
-    testcase_object = Testcase_Object(testcase)
-    origin_fuzzing_time = testcase_object.Interesting_times
 
-    # Execute the test case.
-    muti_javac_compile(testcase_object)
-    muti_harness(testcase_object)
+    end_time =time.time()
 
-    # If do not trigger different behaviors, obtain the code coverage.
-    print(origin_fuzzing_time," ",testcase_object.Interesting_times)
-    if testcase_object.Interesting_times == origin_fuzzing_time:
-        cov_result_list = get_each_coverage()
-        for i in range(3):
-            if cov_result_list[i] > old_cov_result_list[i]:
-                testcase_object.updateProbabilityToOne()
-                old_cov_result_list = cov_result_list
-                break
-    pbar.update(1)
+    tqdm.write(f'take {int(end_time-start_time)}s')
 
-end_time =time.time()
-
-tqdm.write(f'take {int(end_time-start_time)}s')
+if __name__ == '__main__':
+    print('''Select the part of testcase to apply differential test:
+        0-fuzzing origin testcases
+        1-fuzzing mutated testcases(interesting)
+        2- fuzzing mutated testcases(not interesting)
+    ''')
+    choice = input()
+    if choice in [0,1,2]:
+        harness(choice)
+    else:
+        print("Invalid input!")

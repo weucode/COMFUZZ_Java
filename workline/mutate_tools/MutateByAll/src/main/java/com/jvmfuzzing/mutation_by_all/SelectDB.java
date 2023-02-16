@@ -292,7 +292,9 @@ public class SelectDB {
                     rs.getInt("interesting_times"), rs.getInt("Probability"));
                 testcaseList.add(tmpInfo);
             }
-
+            String update = "UPDATE Table_Testcase SET Fuzzing_times = 99 WHERE Fuzzing_times=1;";
+            PreparedStatement ps = conn.prepareStatement(update);
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }

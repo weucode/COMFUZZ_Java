@@ -510,7 +510,8 @@ public class Main {
     public static void main(String[] args)throws Exception, IllegalArgumentException, FileNotFoundException, NullPointerException, IOException,SQLException, ClassNotFoundException, SQLException, SQLSyntaxErrorException {
         Main mainner = new Main();
         mainner.filePath = args[0];
-        List<TestcaseInfo> testcases = s.getAllTestcases();
+        String query = "SELECT * FROM Table_Testcase where Fuzzing_times=1;";
+        List<TestcaseInfo> testcases = s.getAllTestcases(query);
         System.out.println("Totoally get "+testcases.size()+" origin testcases.");
         List<TestcaseInfo> mutatedTestcase = mainner.Insert_Cov(testcases);
         System.out.println("Totoally get "+mutatedTestcase.size()+" mutated testcases.");

@@ -1,9 +1,0 @@
-com/jvmfuzzing/mutation/UsefulMethodInfo.class
-com/jvmfuzzing/mutation/MutateByMethodInfo.class
-com/jvmfuzzing/mutation/Main.class
-com/jvmfuzzing/mutation/Mutator.class
-com/jvmfuzzing/mutation/TestcaseInfo.class
-com/jvmfuzzing/mutation/MutateByMethodInfo$MutatedBlock.class
-com/jvmfuzzing/mutation/DBOperation.class
-com/jvmfuzzing/mutation/VariableDecInfo.class
-com/jvmfuzzing/mutation/GetFiles.class
