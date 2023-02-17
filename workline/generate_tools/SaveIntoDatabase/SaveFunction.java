@@ -5,7 +5,7 @@ import java.io.*;
 
 public class SaveFunction {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
-    static final String DB_URL = "jdbc:mysql://comfort_mysql:3306/JVMFuzzing?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+    static final String DB_URL = "jdbc:mysql://comfuzz_mysql:3306/JVMFuzzing?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
  
     static final String USER = "root";
     static final String PASS = "mysql123";

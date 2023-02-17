@@ -1,6 +1,6 @@
 import pymysql
 
-sql_config = dict(host='comfort_mysql',
+sql_config = dict(host='comfuzz_mysql',
                   port=3306,
                   user='root',
                   passwd='mysql123',

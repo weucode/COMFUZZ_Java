@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class SaveToDB_new {
     public static void insertIntoTable(List<TestcaseInfo> testcaseList) {
         String driver = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:MySQL://comfort_mysql:3306/JVMFuzzing?useUnicode=true&characterEncoding=utf8";
+        String url = "jdbc:MySQL://comfuzz_mysql:3306/JVMFuzzing?useUnicode=true&characterEncoding=utf8";
         String username = "root";
         String password = "mysql123";
         try{
@@ -50,7 +50,7 @@ public class SaveToDB_new {
 
     public static void connection(List<String> fileconnect)throws SQLException, ClassNotFoundException, SQLSyntaxErrorException {
         String driver = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:MySQL://comfort_mysql:3306/JVMFuzzing?useUnicode=true&characterEncoding=utf8";
+        String url = "jdbc:MySQL://comfuzz_mysql:3306/JVMFuzzing?useUnicode=true&characterEncoding=utf8";
         String username = "root";
         String password = "mysql123";
         try {
@@ -164,7 +164,7 @@ public class SaveToDB_new {
     public static void SaveBinary(List<String> Binary_list, List<String> Parm_list)
             throws SQLException, ClassNotFoundException, SQLSyntaxErrorException {
         String driver = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:MySQL://comfort_mysql:3306/JVMFuzzing?useUnicode=true&characterEncoding=utf8";
+        String url = "jdbc:MySQL://comfuzz_mysql:3306/JVMFuzzing?useUnicode=true&characterEncoding=utf8";
         String username = "root";
         String password = "mysql123";
         try {

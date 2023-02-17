@@ -28,7 +28,7 @@ public class SelectDB {
         List<String> results = new ArrayList<String>();
         try {
             String driver = "com.mysql.cj.jdbc.Driver";
-            String url = "jdbc:MySQL://comfort_mysql:3306/JVMFuzzing?useUnicode=true&characterEncoding=utf8";
+            String url = "jdbc:MySQL://comfuzz_mysql:3306/JVMFuzzing?useUnicode=true&characterEncoding=utf8";
             String username = "root";
             String password = "mysql123";
             Class.forName(driver);
@@ -95,7 +95,7 @@ public class SelectDB {
         List<String> results = new ArrayList<String>();
         try {
             String driver = "com.mysql.cj.jdbc.Driver";
-            String url = "jdbc:MySQL://comfort_mysql:3306/JVMFuzzing?useUnicode=true&characterEncoding=utf8";
+            String url = "jdbc:MySQL://comfuzz_mysql:3306/JVMFuzzing?useUnicode=true&characterEncoding=utf8";
             String username = "root";
             String password = "mysql123";
             Class.forName(driver);
@@ -161,7 +161,7 @@ public class SelectDB {
         List<String> results = new ArrayList<String>();
         try {
             String driver = "com.mysql.cj.jdbc.Driver";
-            String url = "jdbc:MySQL://comfort_mysql:3306/JVMFuzzing?useUnicode=true&characterEncoding=utf8";
+            String url = "jdbc:MySQL://comfuzz_mysql:3306/JVMFuzzing?useUnicode=true&characterEncoding=utf8";
             String username = "root";
             String password = "mysql123";
             Class.forName(driver);
@@ -277,7 +277,7 @@ public class SelectDB {
 
     public List<TestcaseInfo> getAllTestcases(String query) {
         String driver = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:MySQL://comfort_mysql:3306/JVMFuzzing?useUnicode=true&characterEncoding=utf8";
+        String url = "jdbc:MySQL://comfuzz_mysql:3306/JVMFuzzing?useUnicode=true&characterEncoding=utf8";
         String username = "root";
         String password = "mysql123";
         List<TestcaseInfo> testcaseList = new ArrayList<TestcaseInfo>();
