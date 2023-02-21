@@ -133,8 +133,8 @@ def harness(testcase_type):
     old_cov_result_list = [0,0,0]
     pbar = tqdm(total=len(list_unfuzzing))
     print("list_unfuzzing size:",len(list_unfuzzing))
-    for index in range(0):
-    # for index in range(len(list_unfuzzing)):
+    # for index in range(0):
+    for index in range(len(list_unfuzzing)):
         testcase = list_unfuzzing[index]
         if testcase[1] == "":
             pbar.update(1)
