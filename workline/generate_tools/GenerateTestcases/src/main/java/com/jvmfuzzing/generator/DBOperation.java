@@ -40,7 +40,7 @@ public class DBOperation {
         return methodList;
     }
  
-    public void insertIntoTable(List<String> contentList) {
+    public void insertIntoTable(List<String> contentList, int startNum) {
         Statement stmt = null;
         Connection conn = null;
         try{
@@ -55,7 +55,7 @@ public class DBOperation {
             for (int i = 0; i < contentList.size(); i++) {     
                 pstmt.clearParameters();     
                 pstmt.setString(1, contentList.get(i));     
-                pstmt.setInt(2, i+1);
+                pstmt.setInt(2, startNum+i+1);
                 pstmt.execute();
                 if (i % 1000 == 0) {         
                     conn.commit();

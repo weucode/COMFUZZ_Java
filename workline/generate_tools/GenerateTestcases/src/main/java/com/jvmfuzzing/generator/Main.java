@@ -19,6 +19,7 @@ public class Main{
 
     public static void main( String[] args ) throws Exception 
     {
+        System.out.println("Start to assemble java methods.");
         // Get all files from path.
         GetFiles fileGetter = new GetFiles();
 
@@ -30,6 +31,7 @@ public class Main{
 
         // Start to assemble.
         int succeesNum = 0;
+        int startNum = 0;
         for(int i=0;i<files.size();i++)
         {
             // Get one of files.
@@ -81,8 +83,9 @@ public class Main{
                 // Save result into database.
                 if(i%1000 == 0 || i == files.size()-1){
                     DBOperation operator = new DBOperation();
-                    operator.insertIntoTable(testcases);
+                    operator.insertIntoTable(testcases, startNum);
                     testcases.clear();
+                    startNum = i+1;
                 }  
             }catch (Exception e){
                 e.printStackTrace();
