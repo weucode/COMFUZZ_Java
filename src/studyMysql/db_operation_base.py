@@ -6,12 +6,6 @@ sql_config = dict(host='comfuzz_mysql',
                   passwd='mysql123',
                   db='JVMFuzzing',
                   charset='utf8mb4')
-# sql_config = dict(host='10.15.0.37',
-#                   port=13000,
-#                   user='root',
-#                   passwd='mysql123',
-#                   db='JVMFuzzing2',
-#                   charset='utf8mb4')
 
 
 class DataBaseHandle(object):
