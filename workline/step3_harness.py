@@ -167,7 +167,7 @@ if __name__ == '__main__':
         1-fuzzing mutated testcases(interesting)
         2- fuzzing mutated testcases(not interesting)
     ''')
-    choice = input()
+    choice = int(input())
     if choice in [0,1,2]:
         harness(choice)
     else:
