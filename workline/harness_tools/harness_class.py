@@ -29,7 +29,7 @@ javac_classpath = ["-classpath","/root/jvm/openjdk8/jdk8u322-b04/build/linux-x86
                                 "/root/jvm/graal-jdk11/graalvm-ce-java11-22.0.0.2/lib:"
                                 +currentPath+"/generate_tools/Dependencies"
 ]
-code_files = "/tmp/comfort_jvm/"
+code_files = "/tmp/comfuzz_jvm/"
 
 class DifferentialTestResult:
     def __init__(self, function_id: int, testcase_id: int, error_type: str, testbed_id: int, testbed_location: str):

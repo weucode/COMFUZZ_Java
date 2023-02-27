@@ -28,7 +28,7 @@ javac_classpath = ["-classpath","/root/jvm/openjdk8/jdk8u322-b04/build/linux-x86
                                 "/root/jvm/graal-jdk11/graalvm-ce-java11-22.0.0.2/lib:"
                                 +currentPath+"/generate_tools/Dependencies"
                                 ]
-code_files = "/tmp/comfort_jvm/"
+code_files = "/tmp/comfuzz_jvm/"
 testbed_info = ['openjdk8','openjdk11','openj9-jdk8','openj9-jdk11','graal-jdk11']
 def check_and_create_dir():
     print("checking java dir and out dir...")
