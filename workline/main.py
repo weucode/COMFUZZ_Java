@@ -1,7 +1,8 @@
 from step1_generator import generate
 from step2_init import generate_testcase
-from step3_harness import harness
+from step3_harness import diff_and_coverage
 from step4_mutation import mutation
+from step5_filter import filter_by_testcase
 
 import os
 import sys
@@ -31,14 +32,17 @@ if __name__ == '__main__':
     generate_testcase()
     
     # Apply differential test on origin testcases.
-    harness(0)
+    diff_and_coverage(0)
     for i in range(hparams.max_iterator):
         # Mutate the testcases.
         mutation()
         # Apply differential test on mutated testcase(interesting).
-        harness(1)
+        diff_and_coverage(1)
 
     # Apply differential test on mutated testcase(not interesting).
-    harness(2)
+    diff_and_coverage(2)
+
+    # Filter faulty cases and known bugs.
+    filter_by_testcase()
     
     print("---End---")

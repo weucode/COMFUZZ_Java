@@ -8,7 +8,7 @@ class Hparams:
 
     parser.add_argument("--clean_database", type=bool, default=False, help="Clean the data table in the database.")
     
-    parser.add_argument("--max_iterator", type=int, default=3, help="The max count of mutation.")
+    parser.add_argument("--max_iterator", type=int, default=1, help="The max count of mutation.")
     
     parser.add_argument("--use_testsuits_head", type=bool, default=False, help="Whether use head extracted from testsuits.")
     parser.add_argument("--testsuits_head_num", type=int, default=5, help="The number of head.")
@@ -23,7 +23,7 @@ class Hparams:
     parser.add_argument('--generate_prefix_list', default="['public class MyJVMTest']", type=str,
                         help='Prefix used for generation, needs to be consist with data_prefix')
     parser.add_argument('--max_length', default=1024, type=int, help='The max value of generation length.')
-    parser.add_argument('--model_dir', default=currentPath.replace('workline','data')+'/model/checkpoint-400000', type=str,
+    parser.add_argument('--model_dir', default=currentPath.replace('workline','data')+'/model/checkpoint-60000', type=str,
                         help='Pretrained model path')
     parser.add_argument('--save_dir', default=currentPath.replace('workline','data')+'/generate', type=str,
                         help='Generate file storage path')
