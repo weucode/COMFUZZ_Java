@@ -70,11 +70,6 @@ public class Main {
         // start to mutate
         int file_num = 0;
         List<TestcaseInfo> mutatedTestcase = new ArrayList<TestcaseInfo>();
-        // Map<String, List<CompilationUnit>> seed_Map = groupList(Seed_compilations);
-        // for (Map.Entry<String, List<CompilationUnit>> entry_com : seed_Map.entrySet()) {
-        //     Insert(entry_com.getValue(), bin_true_par, bin_false_par, bin_true_expr, bin_false_expr);
-        //     file_num++;
-        // }
         for(TestcaseInfo testcase:testcases){
             mutatedTestcase.addAll(Insert(testcase, bin_true_par, bin_false_par, bin_true_expr, bin_false_expr));
             System.out.println("===mutatedTestcase(outer):"+mutatedTestcase.size());
@@ -82,28 +77,6 @@ public class Main {
         }
         System.out.println("Total process " + file_num + " testcases.");
         return mutatedTestcase;
-    }
-
-    // 对文件进行分组
-    public Map<String, List<CompilationUnit>> groupList(List<CompilationUnit> list) {
-
-        if (list == null || list.size() == 0) {
-            return new HashMap<String, List<CompilationUnit>>();
-        }
-        int listSize = list.size();
-        int toIndex = number;
-        Map<String, List<CompilationUnit>> map = new HashMap<String, List<CompilationUnit>>(); // 用map存起来新的分组后数据
-        int keyToken = 0;
-
-        for (int i = 0; i < list.size(); i += number) {
-            if (i + number > listSize) { // 作用为toIndex最后没有900条数据则剩余几条newList中就装几条
-                toIndex = listSize - i;
-            }
-            List<CompilationUnit> newList = list.subList(i, i + toIndex);
-            map.put("keyName" + keyToken, newList);
-            keyToken++;
-        }
-        return map;
     }
 
     public Boolean hasOp(String content){
@@ -209,9 +182,9 @@ public class Main {
                             cu = cuCopy;
                         }
                         if(availableMutants.contains(3)){
-                            System.out.println("-----mutationbyOp------");
+                            // System.out.println("-----mutationbyOp------");
                             CompilationUnit tmpCu = mutationbyOperator.getOperator(cu);
-                            System.out.print("===3-mutatebyop:\n"+cu.toString());
+                            // System.out.print("===3-mutatebyop:\n"+cu.toString());
                             TestcaseInfo tmpInfo = new TestcaseInfo(0, tmpCu.toString(), testcase.getId(), testcase.getMutationTimes()+1, 0, 0);
                             tmpInfo.setMutationMethod(3);
                             mutatedTestcase.add(tmpInfo);
