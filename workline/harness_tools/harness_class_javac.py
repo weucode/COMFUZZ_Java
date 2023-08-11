@@ -29,9 +29,10 @@ javac_classpath = ["-classpath","/root/jvm/openjdk8/jdk8u322-b04/build/linux-x86
                                 +currentPath+"/generate_tools/Dependencies"
                                 ]
 code_files = "/tmp/comfuzz_jvm/"
-testbed_info = ['openjdk8','openjdk11','openj9-jdk8','openj9-jdk11','graal-jdk11']
+testbed_info = ['openjdk8','openjdk11','openj9-jdk8','openj9-jdk11','graal-jdk11','zulu-jdk8']
+
 def check_and_create_dir():
-    print("checking java dir and out dir...")
+    # print("checking java dir and out dir...")
     for jvm_name in testbed_info:
         dir_path = code_files + jvm_name
         if not os.path.exists(dir_path):
@@ -230,7 +231,6 @@ class ThreadLock(Thread):
 
     def run(self):
         try:
-            # 添加javac编译的步骤
             self.output = self.get_classFile(self.testbed_location, self.testcase_path, self.testbed_id)
         except BaseException as e:
             self.returnInfo = 1
@@ -248,12 +248,12 @@ class ThreadLock(Thread):
         cmd.append(code_files + jvm_name + "/out")
         start_time = labdate.GetUtcMillisecondsNow()
         try:
-            print("javac cmd:", cmd)
+            # print("javac cmd:", cmd)
             #pro = subprocess.Popen(cmd, shell=False,universal_newlines=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
             pro = subprocess.Popen(cmd, shell=False, universal_newlines=True, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE)
             stdout, stderr = pro.communicate()
-            print(len(stderr),len(stdout),stderr,stdout)
+            # print(len(stderr),len(stdout),stderr,stdout)
             end_time = labdate.GetUtcMillisecondsNow()
             duration_ms = int(round(
                 (end_time - start_time).total_seconds() * 1000))
@@ -263,11 +263,12 @@ class ThreadLock(Thread):
                                 stderr=stderr,
                                 duration_ms=duration_ms, event_start_epoch_ms=event_start_epoch_ms)
 
-            print("javac finished.")
-            #print(output.serialize())
+            # print("javac finished.")
+            # print(output.serialize())
             return output
         except Exception as e:
-            print("javac failed: ", e)
+            # print("javac failed: ", e)
+            pass
 
 
 class Harness:
@@ -285,12 +286,13 @@ class Harness:
         """
         self.engines = self.get_engines()
         self.name = ""
+    
     def get_class_name(self,Testcase_context):
         #pattern = r"(public class )([a-zA-Z_\d]*?)(?=(\s{)|{)"
         pattern = r"(public class )(MyJVMTest_[\d]*?)(?=(\s{)|{)"
-        print(re.search(pattern, Testcase_context))
+        # print(re.search(pattern, Testcase_context))
         name = re.search(pattern, Testcase_context).group(2)
-        print(name)
+        # print(name)
         self.name = name
 
     def run_testcase(self, function_id: int, testcase_id: int, testcase_context: str) -> HarnessResult:
@@ -311,12 +313,12 @@ class Harness:
         for engine in self.engines:
             testbed_location = engine[1]
             class_path = pathlib.Path(code_files + testbed_location.split("/")[3] + "/out/" + name+".class")
-            #print(class_path)
+            # print(class_path)
             if class_path.is_file() and os.stat(str(class_path)).st_size > 0:
-                print("class file exists.classfile path is: ",class_path)
+                # print("class file exists.classfile path is: ",class_path)
                 counter+=1
             else:
-                print("class file doesn't exists.  ")
+                # print("class file doesn't exists.  ")
                 counter +=0
         return counter
 
@@ -326,20 +328,20 @@ class Harness:
         :param testcase_path: path of the test case
         :return: execution results of all engines
         """
-        print("runhere")
-        print(self.engines)
+        # print("runhere")
+        # print(self.engines)
         outputs = []
         threads_pool = []
         for engine in self.engines:
             testbed_id = engine[0]
             testbed_location = engine[1]
-            print(testbed_location)
+            # print(testbed_location)
             jvm_name = testbed_location.split("/")[3]
             new_file_loc = code_files + jvm_name + "/" + class_name + ".java"
-            print("new_file_loc: ",new_file_loc)
+            # print("new_file_loc: ",new_file_loc)
             with open(new_file_loc, "w", encoding="utf-8")as f:
                 testcase_path = pathlib.Path(new_file_loc)
-                print(testcase_path)
+                # print(testcase_path)
                 f.write(testcase_context)
             tmp = ThreadLock(testbed_location=testbed_location, testcase_path=testcase_path, testbed_id=testbed_id)
             threads_pool.append(tmp)
@@ -351,26 +353,3 @@ class Harness:
             elif thread.output is not None:
                 outputs.append(thread.output)
         return outputs
-
-    # def single_thread(self, testcase_path: pathlib.Path)-> List[Output]:
-    def single_thread(self, testcase_classname: str, testcase_context: str) -> List[Output]:
-        outputs = []
-        for engine in self.engines:
-            testbed_id = engine[0]
-            testbed_location = engine[1]
-            jvm_name = testbed_location.split("/")[3]
-            print(jvm_name)
-            # new_classname = testcase_classname + "_" + jvm_name
-            with open(code_files + jvm_name + "/" + testcase_classname + ".java", "w", encoding="utf-8")as f:
-                testcase_path = pathlib.Path(code_files + jvm_name + "/" + testcase_classname + ".java")
-                print(testcase_path)
-                f.write(testcase_context)
-                # testcase_context = testcase_context.replace(testcase_classname,new_classname,1)
-                # print(testcase_context)
-                tmp = ThreadLock(testbed_location=testbed_location, testcase_path=testcase_path, testbed_id=testbed_id)
-                output = tmp.run()
-                outputs.append(output)
-
-        return outputs
-
-

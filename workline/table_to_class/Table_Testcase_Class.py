@@ -6,7 +6,6 @@ import tempfile
 from src.studyMysql.Table_Operation import Table_Testcase, Table_Function
 from workline.harness_tools.harness_class import Harness as H_java
 from workline.harness_tools.harness_class_javac import Harness as H_javac
-# from workline.table_to_class.Table_Function_Class import Function_Object
 
 
 class Testcase_Object(object):
@@ -26,18 +25,16 @@ class Testcase_Object(object):
         harness = H_javac()
         if self.Testcase_context != "":
             harness.get_class_name(self.Testcase_context)
-            print("start check class file...")
+            # print("start check class file...")
             counter = harness.check_classfile(harness.name)
             return counter
-        else:
-            print(f"{self.Id} has no content.")
+        # else:
+        #     print(f"{self.Id} has no content.")
 
     def engine_compile_testcase(self):
         harness = H_javac()
-        print("Compiling the ",self.Id,"testcase...")
-            #print(f'Apllying {len(harness.get_engines())} engines to test javac.')
+        # print("Compiling the ",self.Id,"testcase...")
         if self.Testcase_context != "":
-            # 取出第一个类的类名
             harness.get_class_name(self.Testcase_context)
             name = harness.name
             compiled_result = harness.run_testcase(self.SourceFun_id, self.Id, self.Testcase_context)
@@ -47,16 +44,16 @@ class Testcase_Object(object):
 
     def engine_run_testcase(self):
         harness = H_java()
-        print("Running the ", self.Id, "testcase...")
+        # print("Running the ", self.Id, "testcase...")
         if self.Testcase_context != "":
-            #print(f'Apllying {len(harness.get_engines())} engines to test jvm.')
+            # print(f'Apllying {len(harness.get_engines())} engines to test jvm.')
             harness.get_class_name(self.Testcase_context)
             harness_result = harness.run_testcase(self.SourceFun_id, self.Id, self.Testcase_context)
             # add fuzzing time
             self.Fuzzing_times += 1
             return harness_result
         else:
-            print(f"{self.Id} has no content.")
+            # print(f"{self.Id} has no content.")
             return None
 
     def add_interesting_times(self, interesting_number):
@@ -65,12 +62,6 @@ class Testcase_Object(object):
     def add_mutation_times(self, mutation_times):
         self.Mutation_times += mutation_times
     
-    # def get_function_content(self):
-    #     table_function = Table_Function()
-    #     function = table_function.selectOneFromTableFunction(self.SourceFun_id)
-    #     function_object = Function_Object(function)
-    #     return function_object
-
     def updateFuzzingTimesInterestintTimes(self):
         table_Testcases = Table_Testcase()
         table_Testcases.updateFuzzingTimesInterestintTimes(self.Fuzzing_times,

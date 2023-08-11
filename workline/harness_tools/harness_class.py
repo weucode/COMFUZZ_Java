@@ -227,14 +227,14 @@ class ThreadLock(Thread):
     def run_test_case(self, testbed_location: str, testcase_path1: pathlib.Path, testbed_id, time: str = "60"):
         try:
             testcase_path = str(testcase_path1)
-            print("start java...")
-            print(testcase_path)
-            if os.path.exists(testcase_path):
-                print("class file exists.")
-            else:
-                print("class file doesn't exist.")
+            # print("start java...")
+            # print(testcase_path)
+            # if os.path.exists(testcase_path):
+            #     print("class file exists.")
+            # else:
+            #     print("class file doesn't exist.")
             execute_path = testcase_path[:testcase_path.rindex("/")]
-            print("execute_path:"+execute_path)
+            # print("execute_path:"+execute_path)
             
             # comfuzz argmuments
             cmd = ["timeout", "-s9", time]
@@ -253,41 +253,20 @@ class ThreadLock(Thread):
             cmd.append("-cp")
             jvm_name = testbed_location.split("/")[3]
             cmd.append(code_files + jvm_name + "/out:"+javac_classpath[1])
-
-            # classming-fop arguments
-            # cmd = [testbed_location]
-            # cmd.append("-Xbootclasspath/a:/JVMfuzzing/zjy/zjy/classming/test1/dependencies/xmlgraphics-commons-1.3.1.jar:/JVMfuzzing/zjy/zjy/classming/test1/dependencies/commons-logging.jar:/JVMfuzzing/zjy/zjy/classming/test1/dependencies/avalon-framework-4.2.0.jar:/JVMfuzzing/zjy/zjy/classming/test1/dependencies/batik-all.jar:/JVMfuzzing/zjy/zjy/classming/test1/dependencies/commons-io-1.3.1.jar:/root/oracle/jdk1.8.0_341/jre/lib/rt.jar")
-            # cmd.append("-classpath")
-            # cmd.append("/JVMfuzzing/zjy/zjy/classming/test1/sootOutput/fop/")
-            # classming-jython arguments
-            # cmd = [testbed_location]
-            # cmd.append("-Xbootclasspath/a:/JVMfuzzing/zjy/zjy/classming/test1/dependencies/guava-r07.jar:/JVMfuzzing/zjy/zjy/classming/test1/dependencies/constantine.jar:/JVMfuzzing/zjy/zjy/classming/test1/dependencies/jnr-posix.jar:/JVMfuzzing/zjy/zjy/classming/test1/dependencies/jaffl.jar:/JVMfuzzing/zjy/zjy/classming/test1/dependencies/jline-0.9.95-SNAPSHOT.jar:/JVMfuzzing/zjy/zjy/classming/test1/dependencies/antlr-3.1.3.jar:/JVMfuzzing/zjy/zjy/classming/test1/dependencies/asm-3.1.jar:/root/oracle/jdk1.8.0_341/jre/lib/rt.jar")
-            # cmd.append("-classpath")
-            # cmd.append("/JVMfuzzing/zjy/zjy/classming/test1/sootOutput/jython/")
-
-            # cmd.append("-noverify")
             
             classfile_path = testcase_path[testcase_path.rindex("/")+1:].replace(".class", "")
-            # cmd += str(classfile_path)
-            # if "/fop/" in testcase_path:
-            #     classfile_path = "org.apache.fop.cli.Main"
-            # elif "/pmd/" in testcase_path:
-            #     classfile_path = "net.sourceforge.pmd.PMD"
-            # elif "/jython" in testcase_path:
-            #     classfile_path = "org.python.util.jython"
-            # else:
-            #     classfile_path = ""
             cmd.append(str(classfile_path))
 
             start_time = labdate.GetUtcMillisecondsNow()
-            print("java cmd:",cmd)
+            # print("java cmd:",cmd)
             pro = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                                stderr=subprocess.PIPE, universal_newlines=True, cwd=execute_path)
             stdout, stderr = pro.communicate()
-            print("java stdout:",stdout)
-            print("java stderr:",stderr)
+            # print("java stdout:",stdout)
+            # print("java stderr:",stderr)
         except Exception as e:
-            print("java failed: ",e)
+            # print("java failed: ",e)
+            pass
         end_time = labdate.GetUtcMillisecondsNow()
         duration_ms = int(round(
             (end_time - start_time).total_seconds() * 1000))
@@ -344,7 +323,7 @@ class Harness:
             testbed_id = engine[0]
             testbed_location = engine[1]
             jvm_name = testbed_location.split("/")[3]
-            print(jvm_name)
+            # print(jvm_name)
             new_file_loc = code_files + jvm_name + "/out/" + self.name + ".class"
             testcase_path = pathlib.Path(new_file_loc)
             tmp = ThreadLock(testbed_location=testbed_location, testcase_path=testcase_path, testbed_id=testbed_id)
@@ -359,37 +338,12 @@ class Harness:
         return outputs
 
 
-
-def single_thread(testcase_classname: str, testcase_context: str,engines) -> List[Output]:
-    outputs = []
-    counter = 0
-
-    for engine in engines:
-        testbed_id = engine[0]
-        testbed_location = engine[1]
-        jvm_name = testbed_location.split("/")[3]
-        print(jvm_name)
-        # new_classname = testcase_classname + "_" + jvm_name
-        with open(code_files + jvm_name + "/" + testcase_classname + ".java", "w", encoding="utf-8")as f:
-            testcase_path = pathlib.Path(code_files + jvm_name + "/" + testcase_classname + ".java")
-            print(testcase_path)
-            f.write(testcase_context)
-            # testcase_context = testcase_context.replace(testcase_classname,new_classname,1)
-            # print(testcase_context)
-            output = run(testbed_location=testbed_location, testcase_path=testcase_path, testbed_id=testbed_id)
-            outputs.append(output)
-            counter += 1
-            if counter >= 2:
-                break
-
-    return outputs
-
 def run(testbed_location, testcase_path, testbed_id):
     try:
         output = run_test_case(testbed_location, testcase_path, testbed_id)
         return output
     except BaseException as e:
-        print(e)
+        # print(e)
         returnInfo = 1
 
 
@@ -408,46 +362,21 @@ def run_test_case(testbed_location: str, testcase_path: pathlib.Path, testbed_id
     cmd += testbed_location_javac+" "
     cmd += str(testcase_path)+" "
     cmd += "-d "+code_files + jvm_name + "/out "
-    print(cmd)
+    # print(cmd)
     start_time = labdate.GetUtcMillisecondsNow()
-    '''
-    try:
-        print("javac cmd:", cmd)
-        p = subprocess.Popen(cmd, shell=False)
-        
-        stdout = None
-        stderr = None
-        end_time = labdate.GetUtcMillisecondsNow()
-        duration_ms = int(round(
-            (end_time - start_time).total_seconds() * 1000))
-        event_start_epoch_ms = labdate.MillisecondsTimestamp(start_time)
-        if stderr is not None or stdout is not None:
-            # len(stderr) >= 0 or len(stdout) >= 0:
-            output = Output(testbed_id=testbed_id, testbed_location=testbed_location, returncode=pro.returncode,
-                            stdout=stdout,
-                            stderr=stderr,
-                            duration_ms=duration_ms, event_start_epoch_ms=event_start_epoch_ms)
-        else:
-            output = None
-
-        return output
-    
-    except Exception as e:
-        print("javac failed: ", e)
-    '''
     output = None
     if output is not None:
         return output
     else:
-        #t.sleep(10)
-        print("start java...")
+        # t.sleep(10)
+        # print("start java...")
         testcase_path=pathlib.Path(testcase_path)
         classfilePath=code_files + testbed_location.split("/")[3] + "/out/" + testcase_path.name.replace(".java", ".class")
-        print(classfilePath)
-        if os.path.exists(classfilePath):
-                print("class file exists.")
-        else:
-            print("class file not exists.")
+        # print(classfilePath)
+        # if os.path.exists(classfilePath):
+        #     print("class file exists.")
+        # else:
+        #     print("class file not exists.")
         cmd +="&& timeout -s9 "+time+" "
         #cmd.append("&&")
         #cmd.append("timeout")
@@ -468,10 +397,10 @@ def run_test_case(testbed_location: str, testcase_path: pathlib.Path, testbed_id
         start_time = labdate.GetUtcMillisecondsNow()
         pro = subprocess.Popen(cmd,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE, universal_newlines=True)
-        print("java cmd:", cmd)
+        # print("java cmd:", cmd)
         stdout, stderr = pro.communicate()
-        print("java stdout:", stdout)
-        print("java stderr:", stderr)
+        # print("java stdout:", stdout)
+        # print("java stderr:", stderr)
         end_time = labdate.GetUtcMillisecondsNow()
         duration_ms = int(round(
                 (end_time - start_time).total_seconds() * 1000))
