@@ -1,0 +1,50 @@
+{
+    "P1":{
+        "engines":[3,4],
+        "keywords":"System.loadLibrary",
+        "returncode":0,
+        "exception":""
+    },
+    "P2":{
+        "engines":[3,4],
+        "keywords":"getCause",
+        "returncode":1,
+        "exception":"NullPointerException"
+    },
+    "P9":{
+        "engines":[3,4],
+        "keywords":"deleteCharAt",
+        "returncode":0,
+        "exception":""
+    },
+    "P10":{
+        "engines":[3],
+        "keywords":"insert",
+        "returncode":0,
+        "exception":""
+    },
+    "P11":{
+        "engines":[3,4],
+        "keywords":"offsetByCodePoints",
+        "returncode":0,
+        "exception":""
+    },
+    "P13":{
+        "engines":[9],
+        "keywords":"new byte[1024 + 1024]",
+        "returncode":1,
+        "exception":"OutOfMemoryError"
+    },
+    "P14":{
+        "engines":[3,4],
+        "keywords":"new Thread",
+        "returncode":0,
+        "exception":""
+    },
+    "P15":{
+        "engines":[3,4],
+        "keywords":"new Properties()",
+        "returncode":1,
+        "exception":"ExceptionInInitializerError"
+    }
+}
