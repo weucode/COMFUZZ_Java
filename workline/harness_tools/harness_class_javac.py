@@ -249,7 +249,7 @@ class ThreadLock(Thread):
         start_time = labdate.GetUtcMillisecondsNow()
         try:
             # print("javac cmd:", cmd)
-            #pro = subprocess.Popen(cmd, shell=False,universal_newlines=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            # pro = subprocess.Popen(cmd, shell=False,universal_newlines=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
             pro = subprocess.Popen(cmd, shell=False, universal_newlines=True, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE)
             stdout, stderr = pro.communicate()

@@ -2,3 +2,4 @@ __pycache__/
 *.log
 data/
 workline/generate_tools/Dependencies
+workline/generate_tools/TmpClasses

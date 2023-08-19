@@ -278,7 +278,7 @@ public class CodeVisitor{
                 }
             }
         } catch (Exception e){
-            logger.error("Error when add needful arguments as gloabl variables!\n"+e.getMessage());
+            // logger.error("Error when add needful arguments as gloabl variables!\n"+e.getMessage());
             return "";
         }       
         // Add all gloable variables and methods in the old class node.
@@ -306,7 +306,7 @@ public class CodeVisitor{
         }
         catch(Exception e){
             this.failNum++;
-            logger.error("Content:\n{}Error message:\n{}",StringUtils.join(needfulArgList,"\n"),e.getMessage()); 
+            // logger.error("Content:\n{}Error message:\n{}",StringUtils.join(needfulArgList,"\n"),e.getMessage()); 
             return "";  
         }
         return code;        

@@ -38,7 +38,7 @@ public class VariableComponent{
         try{
             formativeVarValue = StaticJavaParser.parseVariableDeclarationExpr(varDec).getVariable(0).getInitializer().get();
         } catch(Exception e){
-            logger.error(varDec+"\n\n"+e.getMessage());
+            // logger.error(varDec+"\n\n"+e.getMessage());
             formativeVarValue = StaticJavaParser.parseExpression("null");
         }
         return formativeVarValue;
