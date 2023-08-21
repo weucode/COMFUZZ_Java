@@ -19,11 +19,15 @@ from src.utils.config import Hparams
 def loadModel(hparams):
     start = time.time()
     print(f'Loading the model, it will take about 10 seconds, please wait a moment.')
-    print("Model path:"+hparams.model_dir)
+    # print("Model path:"+hparams.model_dir)
     tokenizer = AutoTokenizer.from_pretrained(hparams.model_dir)
     model = AutoModelForCausalLM.from_pretrained(hparams.model_dir)
-    generator = pipeline(task="text-generation", model=model, tokenizer=tokenizer, device=0)
-    print("Model loading completed:", time.time() - start)
+    if hparams.use_gpus:
+        generator = pipeline(task="text-generation", model=model, tokenizer=tokenizer)
+    else:
+        generator = pipeline(task="text-generation", model=model, tokenizer=tokenizer, device = torch.device('cpu'))
+    spend_time = round(time.time() - start, 2)
+    print(f"Model loading completed:{spend_time}s.")
     return generator, tokenizer
 
 def generationTextPipe(hparams,generator,tokenizer,each_iter_num,prefixList,num_return_sequences=50,count=1):
@@ -61,6 +65,7 @@ def get_proper_num(tmp_num):
 def generate(hparams):
     # Load model.
     generator, tokenizer = loadModel(hparams)
+    start = time.time()
     if hparams.use_testsuits_head:
         # Init arguments.
         selected_head = get_model_head(hparams.testsuits_head_num)
@@ -88,19 +93,23 @@ def generate(hparams):
         prefixList = ['import java']
         generationTextPipe( hparams, generator, tokenizer, each_iter_num, prefixList=prefixList, 
                             num_return_sequences = second_head, count = first_head*each_iter_num+1)
+    spend_time = round(time.time() - start, 2)
+    print(f"Generation completed:{spend_time}s.\n")
 
     # Check grammar.
     print("Start to check grammar.")
     task = os.popen("cd ./generate_tools/GrammaCheck && javac checkGenerate.java && java checkGenerate "+hparams.save_dir)
     task.close()
+    print("Finish checking.\n")
 
     # Insert into database.
     args_content = " ".join([hparams.save_dir, "function", "Table_Function"])
     cmd = "cd ./generate_tools/SaveIntoDatabase && javac SaveFunction.java && java SaveFunction " + args_content
-    print("cmd:"+cmd)
+    # print("cmd:"+cmd)
     print("Start to insert.")
     task = os.popen(cmd)
     task.close()
+    print("Finish inserting.\n")
 
 
 if __name__ == '__main__':
