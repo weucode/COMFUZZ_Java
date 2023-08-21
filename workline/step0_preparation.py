@@ -25,14 +25,16 @@ def update_java_version():
 
 def unzip_model():
     # run_cmd("unzip -q checkpoint-400000.zip", currentPath.replace("workline", "data/model"))
-    cmd = "unzip -q -d "+currentPath.replace("workline", "data/model")+" checkpoint-60000.zip"
+    # cmd = "unzip -q -d "+currentPath.replace("workline", "data/model")+" checkpoint-60000.zip"
+    cmd = "tar zxf checkpoint-60000.tar.gz -C "+currentPath.replace("workline", "data/model")
     run_cmd(cmd, "/root")
 
 def unzip_dependencies():
     run_cmd("unzip -q Dependencies.zip", currentPath+"/generate_tools")
 
 def unzip_jvms():
-    run_cmd("unzip -q jvm_20230821.zip", "/root")
+    # run_cmd("unzip -q jvm_20230216.zip", "/root")
+    run_cmd("tar zxf jvm.tar.gz", "/root")
 
 def install_mvn_project():
     for i in range(3):
@@ -40,7 +42,14 @@ def install_mvn_project():
 
 def create_data_file():
     os.makedirs(currentPath.replace("workline", "data"))
-    os.makedirs(currentPath.replace("workline", "data/model"))
+
+def main():
+    create_data_file()
+    unzip_model()
+    unzip_dependencies()
+    unzip_jvms()
+    # update_java_version()
+    install_mvn_project()
 
 
 if __name__ == '__main__':
