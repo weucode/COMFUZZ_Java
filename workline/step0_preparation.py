@@ -42,7 +42,7 @@ def install_mvn_project():
 
 def create_data_file():
     os.makedirs(currentPath.replace("workline", "data"))
-  os.makedirs(currentPath.replace("workline", "data/model"))
+    os.makedirs(currentPath.replace("workline", "data/model"))
 
 def main():
     create_data_file()
