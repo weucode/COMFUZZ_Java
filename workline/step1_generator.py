@@ -23,9 +23,9 @@ def loadModel(hparams):
     tokenizer = AutoTokenizer.from_pretrained(hparams.model_dir)
     model = AutoModelForCausalLM.from_pretrained(hparams.model_dir)
     if hparams.use_gpus:
-        generator = pipeline(task="text-generation", model=model, tokenizer=tokenizer)
+        generator = pipeline(task="text-generation", model=model, tokenizer=tokenizer, device = 0)
     else:
-        generator = pipeline(task="text-generation", model=model, tokenizer=tokenizer, device = torch.device('cpu'))
+        generator = pipeline(task="text-generation", model=model, tokenizer=tokenizer)
     spend_time = round(time.time() - start, 2)
     print(f"Model loading completed:{spend_time}s.")
     return generator, tokenizer
