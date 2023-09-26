@@ -15,6 +15,8 @@ class Hparams:
 
     parser.add_argument('--file_num', default=10, type=int,
                         help='Specify the total number of generated files.Please enter a multiple of 10!')
+    parser.add_argument('--use_gpus', default=True, type=bool,
+                        help='Whether use GPUs.')
     parser.add_argument('--batch_size', default=8, type=int,
                         help='Batch size for generation(increase for GPUs, 16 is recommended for RTX 2080)')
     parser.add_argument('--top_k', default=0, type=int, help='Sample only from top k tokens')
